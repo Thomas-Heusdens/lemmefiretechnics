@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useRef } from 'react';
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import WhatWeDo from './components/WhatWeDo';
+import Formations from './components/Formations';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Gallery from './components/Gallery';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState<'home' | 'gallery'>('home');
+  const formationsRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToSection = (section: string) => {
+    if (section === 'contact') {
+      contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (section === 'firefighters' || section === 'civilians') {
+      formationsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        const element = document.getElementById(section);
+        element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  };
+
+  const handleNavigate = (page: 'home' | 'gallery') => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen bg-black">
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onScrollToSection={handleScrollToSection}
+      />
+
+      {currentPage === 'home' ? (
+        <>
+          <Hero onScrollToContact={() => handleScrollToSection('contact')} />
+          <WhatWeDo />
+          <Formations ref={formationsRef} onContactClick={() => handleScrollToSection('contact')} />
+          <Contact ref={contactRef} />
+        </>
+      ) : (
+        <Gallery />
+      )}
+
+      <Footer onNavigate={handleNavigate} onScrollToSection={handleScrollToSection} />
+    </div>
+  );
 }
 
-export default App
+export default App;
