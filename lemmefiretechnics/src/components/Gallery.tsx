@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
-// Traduction des catégories pour l'affichage et le filtrage
-// Note: J'utilise des constantes pour éviter les erreurs de frappe
+type GalleryImage = {
+  url: string;
+  title: string;
+  category: string;
+};
+
 const CAT_TRAINING = 'Entraînement';
 const CAT_EQUIPMENT = 'Équipement';
 const CAT_FACILITY = 'Installations';
 const CAT_ALL = 'tout';
 
-const galleryImages = [
+const galleryImages: GalleryImage[] = [
   {
     url: 'https://images.pexels.com/photos/3867340/pexels-photo-3867340.jpeg?auto=compress&cs=tinysrgb&w=800',
     title: 'Exercice à Feu Réel',
@@ -72,10 +76,17 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [filter, setFilter] = useState<string>(CAT_ALL);
 
-  // Mise à jour des catégories disponibles
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedImage]);
+
   const categories = [CAT_ALL, CAT_TRAINING, CAT_EQUIPMENT, CAT_FACILITY];
 
   const filteredImages = filter === CAT_ALL
@@ -83,16 +94,16 @@ export default function Gallery() {
     : galleryImages.filter(img => img.category === filter);
 
   return (
-    <div className="min-h-screen bg-black pt-32 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-5xl font-bold mb-2 md:mb-4">
             <span className="text-white">Galerie </span>
             <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
               Photos
             </span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto">
             Découvrez nos sessions de formation pratique, nos installations de pointe et le dévouement
             de nos étudiants et instructeurs.
           </p>
@@ -103,13 +114,12 @@ export default function Gallery() {
             <button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 text-sm md:text-base ${
                 filter === category
                   ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-900/50'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
+                  : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white border border-white/5'
               }`}
             >
-              {/* Capitalize first letter */}
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </button>
           ))}
@@ -119,49 +129,58 @@ export default function Gallery() {
           {filteredImages.map((image, index) => (
             <div
               key={index}
-              onClick={() => setSelectedImage(index)}
-              className="relative group cursor-pointer overflow-hidden rounded-xl aspect-square"
+              onClick={() => setSelectedImage(image)}
+              className="relative group cursor-pointer overflow-hidden rounded-xl aspect-square border border-white/10 shadow-md shadow-black/50"
             >
               <img
                 src={image.url}
                 alt={image.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-white font-semibold text-lg mb-1">{image.title}</h3>
-                <p className="text-red-400 text-sm">{image.category}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <h3 className="text-white font-semibold text-lg mb-1 truncate">{image.title}</h3>
+                <span className="inline-block px-2 py-1 bg-red-600/20 border border-red-500/30 rounded-full text-red-400 text-xs font-medium">
+                  {image.category}
+                </span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {selectedImage !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
+      {selectedImage && (
+        <div 
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors"
+        >
+          <div 
+            className="relative w-auto h-auto max-w-5xl max-h-[85vh] rounded-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
           >
-            <X className="w-6 h-6 text-white" />
-          </button>
-          {/* Note: j'ai ajouté une vérification ici car filteredImages change quand on filtre */}
-          <div className="max-w-6xl w-full" onClick={(e) => e.stopPropagation()}>
+            
             <img
-              src={filteredImages[selectedImage]?.url || galleryImages[selectedImage].url}
-              alt={filteredImages[selectedImage]?.title || galleryImages[selectedImage].title}
-              className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+              src={selectedImage.url}
+              alt={selectedImage.title}
+              className="block w-auto h-auto max-h-[85vh] max-w-full object-contain" 
             />
-            <div className="text-center mt-6">
-              <h3 className="text-white font-semibold text-2xl mb-2">
-                {filteredImages[selectedImage]?.title || galleryImages[selectedImage].title}
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/10 pointer-events-none"></div>
+
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-red-600 backdrop-blur-sm text-white rounded-full transition-all duration-300 z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-left z-10">
+              <h3 className="text-white font-bold text-xl md:text-3xl mb-2 drop-shadow-md">
+                {selectedImage.title}
               </h3>
-              <p className="text-red-400">
-                {filteredImages[selectedImage]?.category || galleryImages[selectedImage].category}
-              </p>
+              <span className="inline-block px-3 py-1 bg-red-600/60 backdrop-blur-md border border-red-500/30 rounded-full text-white text-xs md:text-sm font-medium shadow-sm">
+                {selectedImage.category}
+              </span>
             </div>
           </div>
         </div>

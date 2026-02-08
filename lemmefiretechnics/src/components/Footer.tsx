@@ -1,4 +1,4 @@
-import { Flame, Mail, MapPin, Instagram } from 'lucide-react';
+import { Flame, Mail, Instagram, Phone } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: 'home' | 'gallery') => void;
@@ -26,7 +26,7 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Formation et éducation professionnelles à la sécurité incendie pour les pompiers et les futurs membres des services de secours.
+              Formation et éducation professionnelles à la sécurité incendie pour les pompiers et les civils.
             </p>
           </div>
 
@@ -46,7 +46,7 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
                   onClick={() => handleLinkClick('firefighters')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Fromations pour Professionel
+                  Fromations pour Pompiers
                 </button>
               </li>
               <li>
@@ -54,7 +54,7 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
                   onClick={() => handleLinkClick('civilians')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Formations pour Civil
+                  Formations pour Civils
                 </button>
               </li>
               <li>
@@ -81,14 +81,10 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
                 </a>
               </li>
               <li className="flex items-start space-x-2">
-                <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">
-                  Fire Safety Training Center
-                  <br />
-                  1234 Safety Boulevard
-                  <br />
-                  Brussels, BE 1000
-                </span>
+                <Phone className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                <a href="tel:+32456789012" className="text-gray-400 hover:text-red-400 text-sm transition-colors">
+                  +32 (456) 789-012
+                </a>
               </li>
             </ul>
           </div>
