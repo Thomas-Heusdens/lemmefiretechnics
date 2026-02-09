@@ -14,7 +14,7 @@ interface FormationLevel {
   goals?: string;
   competencies?: string[];
   gallery_urls?: string[];
-  video_url?: string;
+  video_url: string;
 }
 
 interface Formation {
@@ -274,7 +274,11 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
                         ...currentLevel, 
                         formationName: formation.name,
                         level: currentLevel.display_order,
-                        imageUrl: currentLevel.image_url
+                        
+                        imageUrl: currentLevel.image_url,
+                        videoUrl: currentLevel.video_url,
+                        galleryUrls: currentLevel.gallery_urls,
+                        sessionsPerWeek: currentLevel.sessions_per_week
                     })}
                     className="w-full py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white text-sm md:text-base font-bold rounded-xl transition-all duration-300 shadow-lg shadow-red-900/20 hover:shadow-red-900/40 hover:-translate-y-1 relative z-20 active:scale-95"
                   >

@@ -63,7 +63,7 @@ export default function WhatWeDo() {
   const handleBackToList = () => setSelectedPdf(null);
 
   return (
-    <section className="py-10 md:py-32 bg-gradient-to-b from-black via-gray-900 to-black">
+    <section className="py-10 md:py-24 bg-gradient-to-b from-black via-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         
         <div className="text-center mb-8 md:mb-16">

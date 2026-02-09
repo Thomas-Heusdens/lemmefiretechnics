@@ -1,14 +1,19 @@
 import { Flame, Mail, Instagram, Phone } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (page: 'home' | 'gallery') => void;
-  onScrollToSection?: (section: string) => void;
-}
+export default function Footer() {
+  const navigate = useNavigate();
 
-export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
-  const handleLinkClick = (section: string) => {
-    onNavigate('home');
-    setTimeout(() => onScrollToSection?.(section), 100);
+  const handleLinkClick = (path: string, hash?: string) => {
+    navigate(path);
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
@@ -35,23 +40,23 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => onNavigate('home')}
+                  onClick={() => handleLinkClick('/')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Acceuil
+                  Accueil
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => handleLinkClick('firefighters')}
+                  onClick={() => handleLinkClick('/formations/firefighter')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Fromations pour Pompiers
+                  Formations pour Pompiers
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => handleLinkClick('civilians')}
+                  onClick={() => handleLinkClick('/formations/civilian')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
                   Formations pour Civils
@@ -59,10 +64,10 @@ export default function Footer({ onNavigate, onScrollToSection }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('gallery')}
+                  onClick={() => handleLinkClick('/gallery')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Gallerie
+                  Galerie
                 </button>
               </li>
             </ul>

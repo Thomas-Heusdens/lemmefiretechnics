@@ -7,7 +7,7 @@ interface FormationsProps {
 
 const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySelect }, ref) => {
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-black relative overflow-hidden">
+    <section ref={ref} className="py-16 md:py-20 bg-black relative overflow-hidden">
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-600 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-600 rounded-full blur-3xl"></div>

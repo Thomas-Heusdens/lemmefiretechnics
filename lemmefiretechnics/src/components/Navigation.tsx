@@ -1,22 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { Flame, ChevronDown, Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-type PageType = 'home' | 'gallery' | 'formations' | 'formation-detail' | 'level-detail';
-
-interface NavigationProps {
-  currentPage: PageType;
-  onNavigate: (page: PageType, type?: 'civilian' | 'firefighter') => void;
-}
-
-export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
+export default function Navigation() {
   const [isFormationOpen, setIsFormationOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const isFormationsActive = ['formations', 'formation-detail', 'level-detail'].includes(currentPage);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  // Check if we are in any formations sub-route
+  const isFormationsActive = location.pathname.includes('/formations') || location.pathname.includes('/formation/');
+
+  // Close mobile menu when screen resizes to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -27,6 +26,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Standard click outside logic
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -51,8 +51,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     };
   }, [isFormationOpen]);
 
-  const handleNavClick = (page: PageType, type?: 'civilian' | 'firefighter') => {
-    onNavigate(page, type);
+  // Helper to handle navigation
+  const handleNavClick = (path: string) => {
+    navigate(path);
     setIsMobileMenuOpen(false);
     setIsFormationOpen(false);
   };
@@ -63,7 +64,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
         <div className="flex justify-between items-center h-20">
           
           {/* LOGO SECTION */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('home')}>
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('/')}>
             <div className="relative">
               <Flame className="w-8 h-8 md:w-10 md:h-10 text-red-600" fill="currentColor" />
               <div className="absolute inset-0 bg-red-600 blur-xl opacity-50"></div>
@@ -76,9 +77,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
           {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => handleNavClick('home')}
+              onClick={() => handleNavClick('/')}
               className={`text-sm font-medium transition-colors ${
-                currentPage === 'home' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
+                location.pathname === '/' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
               }`}
             >
               ACCUEIL
@@ -105,13 +106,13 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-48 bg-gray-900 border border-red-900/30 rounded-lg shadow-xl shadow-black/50 overflow-hidden"
                 >
                   <button
-                    onClick={() => handleNavClick('formations', 'firefighter')}
+                    onClick={() => handleNavClick('/formations/firefighter')}
                     className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors border-b border-gray-800"
                   >
                     POMPIERS
                   </button>
                   <button
-                    onClick={() => handleNavClick('formations', 'civilian')}
+                    onClick={() => handleNavClick('/formations/civilian')}
                     className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors"
                   >
                     CIVILS
@@ -121,9 +122,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             </div>
 
             <button
-              onClick={() => handleNavClick('gallery')}
+              onClick={() => handleNavClick('/gallery')}
               className={`text-sm font-medium transition-colors ${
-                currentPage === 'gallery' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
+                location.pathname === '/gallery' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
               }`}
             >
               GALERIE
@@ -148,9 +149,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
           <div className="px-4 py-8 flex flex-col items-center space-y-6">
             
             <button
-              onClick={() => handleNavClick('home')}
+              onClick={() => handleNavClick('/')}
               className={`text-lg font-medium tracking-wide transition-colors ${
-                currentPage === 'home' ? 'text-red-500' : 'text-gray-300'
+                location.pathname === '/' ? 'text-red-500' : 'text-gray-300'
               }`}
             >
               ACCUEIL
@@ -164,18 +165,18 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
               </span>
               
               <button
-                onClick={() => handleNavClick('formations', 'firefighter')}
+                onClick={() => handleNavClick('/formations/firefighter')}
                 className={`text-lg font-medium transition-colors ${
-                  currentPage === 'formations' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
+                  location.pathname.includes('firefighter') ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
                 }`}
               >
                 POMPIERS
               </button>
               
               <button
-                onClick={() => handleNavClick('formations', 'civilian')}
+                onClick={() => handleNavClick('/formations/civilian')}
                 className={`text-lg font-medium transition-colors ${
-                  currentPage === 'formations' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
+                  location.pathname.includes('civilian') ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
                 }`}
               >
                 CIVILS
@@ -185,9 +186,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             <div className="w-12 h-px bg-gray-800/80"></div>
 
             <button
-              onClick={() => handleNavClick('gallery')}
+              onClick={() => handleNavClick('/gallery')}
               className={`text-lg font-medium tracking-wide transition-colors ${
-                currentPage === 'gallery' ? 'text-red-500' : 'text-gray-300'
+                location.pathname === '/gallery' ? 'text-red-500' : 'text-gray-300'
               }`}
             >
               GALERIE
