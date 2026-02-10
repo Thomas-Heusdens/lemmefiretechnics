@@ -52,7 +52,7 @@ const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySele
 
               <div className="relative h-40 md:h-48 mb-6 rounded-xl overflow-hidden">
                 <img
-                  src="https://images.pexels.com/photos/6346777/pexels-photo-6346777.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/cutting_cars.webp"
                   alt="Professional firefighter training"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />
@@ -102,7 +102,7 @@ const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySele
 
               <div className="relative h-40 md:h-48 mb-6 rounded-xl overflow-hidden">
                 <img
-                  src="https://images.pexels.com/photos/2459439/pexels-photo-2459439.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/burning.webp"
                   alt="Civilian fire safety training"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />

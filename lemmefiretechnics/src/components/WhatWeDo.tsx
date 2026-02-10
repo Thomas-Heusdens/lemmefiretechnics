@@ -1,51 +1,17 @@
-import { Flame, Shield, Lightbulb, ChevronLeft, ChevronRight, FileText, Download, X, ArrowLeft, ShieldCheck, Crosshair } from 'lucide-react';
-import { useEffect, useState } from 'react';
-
-const CERTIFICATE_GROUPS = [
-  {
-    title: "Commandement & Leadership",
-    items: [
-      { name: "Brevet OFF1 - Officier", file: "/test.pdf" },
-      { name: "Brevet ADJ - Adjudant", file: "/test.pdf" },
-      { name: "Gestion de crise niveau 2", file: "/test.pdf" },
-    ]
-  },
-  {
-    title: "Techniques Spéciales",
-    items: [
-      { name: "Instructeur LCI (Lutte Contre l'Incendie)", file: "/test.pdf" },
-      { name: "Spécialiste Secours Routier", file: "/test.pdf" },
-      { name: "Opérateur GRIMP", file: "/test.pdf" },
-    ]
-  },
-  {
-    title: "Pédagogie",
-    items: [
-      { name: "Formation Pédagogique FOROP 1", file: "/test.pdf" },
-      { name: "Coordinateur CFPB", file: "/test.pdf" },
-    ]
-  }
-];
+import { Flame, Lightbulb, ChevronLeft, ChevronRight, ShieldCheck, Crosshair } from 'lucide-react';
+import { useState } from 'react';
+import BrevetsModal from './BrevetsModal';
 
 const chinaImages = [
-  "https://images.pexels.com/photos/280076/pexels-photo-280076.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://tricountytech.edu/wp-content/uploads/2024/12/Firefighter-EMT-High-School-Square-Image-scaled.jpg",
-  "https://images.pexels.com/photos/1046348/pexels-photo-1046348.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "/china.webp",
+  "/China2.webp",
+  "/china_group.webp",
 ];
 
 export default function WhatWeDo() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPdf, setSelectedPdf] = useState<{ name: string; file: string } | null>(null);
 
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isModalOpen]);
-  
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % chinaImages.length);
   };
@@ -53,14 +19,6 @@ export default function WhatWeDo() {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + chinaImages.length) % chinaImages.length);
   };
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedPdf(null);
-  };
-  const handlePdfSelect = (item: { name: string; file: string }) => setSelectedPdf(item);
-  const handleBackToList = () => setSelectedPdf(null);
 
   return (
     <section className="py-10 md:py-24 bg-gradient-to-b from-black via-gray-900 to-black">
@@ -111,7 +69,7 @@ export default function WhatWeDo() {
                 <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                   La transmission du savoir ne s'improvise pas. Je détiens{' '}
                   <button 
-                    onClick={openModal}
+                    onClick={() => setIsModalOpen(true)}
                     className="text-red-400 font-semibold hover:text-red-300 hover:underline transition-all cursor-pointer focus:outline-none"
                   >
                     l'ensemble des brevets
@@ -210,109 +168,8 @@ export default function WhatWeDo() {
 
       </div>
 
-      {/* --- MODAL PDF --- */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-          <div 
-            className="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity" 
-            onClick={closeModal}
-          ></div>
+      <BrevetsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-          <div className="relative w-full max-w-5xl h-[85vh] bg-gray-950 rounded-2xl shadow-2xl border border-gray-800 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            
-            <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-gray-800 bg-gray-900">
-              <div className="flex items-center space-x-3">
-                {selectedPdf ? (
-                  <button 
-                    onClick={handleBackToList}
-                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                  >
-                    <ArrowLeft className="w-5 h-5" />
-                    <span className="hidden sm:inline text-sm font-medium">Retour</span>
-                  </button>
-                ) : (
-                  <div className="flex items-center space-x-3">
-                    <Shield className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
-                    <h3 className="text-lg md:text-xl font-bold text-white">Certifications</h3>
-                  </div>
-                )}
-              </div>
-              
-              <button 
-                onClick={closeModal}
-                className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="flex-1 overflow-hidden relative bg-gray-950">
-              {selectedPdf ? (
-                <div className="w-full h-full flex flex-col">
-                  <div className="px-6 py-3 bg-gray-900/50 border-b border-gray-800 flex justify-between items-center text-sm">
-                    <span className="text-white font-medium truncate max-w-[200px] md:max-w-md">{selectedPdf.name}</span>
-                    <a 
-                      href={selectedPdf.file} 
-                      download 
-                      className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors"
-                    >
-                      <Download className="w-4 h-4" />
-                      <span className="hidden sm:inline">Télécharger</span>
-                    </a>
-                  </div>
-                  <iframe 
-                    src={`${selectedPdf.file}#toolbar=0&navpanes=0&scrollbar=0`}
-                    className="w-full h-full bg-white"
-                    title="PDF Viewer"
-                  />
-                </div>
-              ) : (
-                <div className="h-full overflow-y-auto p-4 md:p-8 scrollbar-thin scrollbar-thumb-gray-800">
-                  <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {CERTIFICATE_GROUPS.map((group, index) => (
-                      <div key={index} className="space-y-4">
-                        <h4 className="text-lg font-bold text-red-500 border-b border-red-900/30 pb-2 mb-4">
-                          {group.title}
-                        </h4>
-                        <div className="space-y-2">
-                          {group.items.map((item, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => handlePdfSelect(item)}
-                              className="w-full group flex items-start p-3 rounded-lg hover:bg-white/5 border border-transparent hover:border-gray-800 transition-all text-left"
-                            >
-                              <FileText className="w-5 h-5 text-gray-500 group-hover:text-red-500 mt-0.5 mr-3 transition-colors shrink-0" />
-                              <div>
-                                <div className="text-sm md:text-base text-gray-300 group-hover:text-white font-medium transition-colors">
-                                  {item.name}
-                                </div>
-                                <div className="text-xs text-gray-500 mt-1">Voir le certificat</div>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="mt-8 md:mt-12 p-4 md:p-6 bg-blue-900/10 border border-blue-900/30 rounded-xl flex items-start gap-4">
-                    <div className="p-2 bg-blue-600/20 rounded-lg shrink-0">
-                      <Shield className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1 text-sm md:text-base">Authenticité garantie</h4>
-                      <p className="text-xs md:text-sm text-gray-400">
-                        Tous les brevets sont des copies numériques conformes aux originaux.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

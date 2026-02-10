@@ -1,4 +1,6 @@
 import { ArrowRight, Award, Users, BookOpen } from 'lucide-react';
+import { useState } from 'react';
+import BrevetsModal from './BrevetsModal';
 
 interface HeroProps {
   onScrollToContact: () => void;
@@ -6,12 +8,14 @@ interface HeroProps {
 }
 
 export default function Hero({ onScrollToContact, onScrollToFormations }: HeroProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: 'url("/hero-background.jpg")',
+          backgroundImage: 'url("/hero.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -81,9 +85,12 @@ export default function Hero({ onScrollToContact, onScrollToFormations }: HeroPr
               </div>
 
               <div className="flex flex-col md:flex-row items-center md:space-x-3 px-1 md:px-0">
-                <div className="w-9 h-9 md:w-12 md:h-12 bg-red-600/20 rounded-lg flex items-center justify-center shrink-0 mb-1 md:mb-0">
+                <button 
+                  onClick={() => setIsModalOpen(true)} 
+                  className="w-9 h-9 md:w-12 md:h-12 bg-red-600/20 rounded-lg flex items-center justify-center shrink-0 mb-1 md:mb-0"
+                >
                   <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
-                </div>
+                </button>
                 <div className="text-center md:text-left">
                   <div className="text-xl md:mt-0 mt-1 md:text-2xl font-bold text-white leading-none md:leading-normal">10+</div>
                   <div className="text-[11px] sm:text-xs md:text-sm text-gray-400">Brevets</div>
@@ -92,6 +99,7 @@ export default function Hero({ onScrollToContact, onScrollToFormations }: HeroPr
             </div>
           </div>
       </div>
+      <BrevetsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

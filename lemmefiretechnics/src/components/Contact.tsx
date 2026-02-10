@@ -159,7 +159,7 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
 
             <div className="relative h-64 lg:h-full rounded-2xl overflow-hidden group">
               <img
-                  src="https://images.pexels.com/photos/280076/pexels-photo-280076.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/group_with_masker.jpg"
                   alt="Firefighter equipment"
                   className="w-full h-full object-cover"
               />
