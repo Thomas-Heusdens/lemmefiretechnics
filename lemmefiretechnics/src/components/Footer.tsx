@@ -1,8 +1,10 @@
 import { Flame, Mail, Instagram, Phone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import hook
 
 export default function Footer() {
   const navigate = useNavigate();
+  const { t } = useTranslation(); // Initialize hook
 
   const handleLinkClick = (path: string, hash?: string) => {
     navigate(path);
@@ -20,6 +22,8 @@ export default function Footer() {
     <footer className="bg-black border-t border-red-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          
+          {/* BRANDING */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="relative">
@@ -31,19 +35,20 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Formation et éducation professionnelles à la sécurité incendie pour les pompiers et les civils.
+              {t('footer.description')}
             </p>
           </div>
 
+          {/* QUICK LINKS */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Liens rapides</h3>
+            <h3 className="text-white font-semibold mb-4">{t('footer.quick_links')}</h3>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={() => handleLinkClick('/')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Accueil
+                  {t('nav.home')}
                 </button>
               </li>
               <li>
@@ -51,7 +56,7 @@ export default function Footer() {
                   onClick={() => handleLinkClick('/formations/firefighter')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Formations pour Pompiers
+                  {t('home_formations.pro.title')}
                 </button>
               </li>
               <li>
@@ -59,7 +64,7 @@ export default function Footer() {
                   onClick={() => handleLinkClick('/formations/civilian')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Formations pour Civils
+                  {t('home_formations.civil.title')}
                 </button>
               </li>
               <li>
@@ -67,14 +72,15 @@ export default function Footer() {
                   onClick={() => handleLinkClick('/gallery')}
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  Galerie
+                  {t('nav.gallery')}
                 </button>
               </li>
             </ul>
           </div>
 
+          {/* CONTACT */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact</h3>
+            <h3 className="text-white font-semibold mb-4">{t('contact.title_end')}</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <Mail className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -94,8 +100,9 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* SOCIAL */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Suivez-nous</h3>
+            <h3 className="text-white font-semibold mb-4">{t('footer.follow_us')}</h3>
             <a
               href="https://www.instagram.com/lemmefiretechnics/"
               target="_blank"
@@ -108,13 +115,14 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* COPYRIGHT */}
         <div className="pt-8 border-t border-red-900/30">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-500 text-sm">
-              &copy; {new Date().getFullYear()} LEMME FIRE TECHNICS. Tous droits réservés.
+              &copy; {new Date().getFullYear()} LEMME FIRE TECHNICS. {t('footer.copyright')}
             </p>
             <p className="text-gray-500 text-sm">
-                Créé avec passion par{' '}
+                {t('footer.created_by')}{' '}
                 <a 
                     href="https://www.linkedin.com/in/thomas-heusdens-0bba19258/" 
                     target="_blank" 

@@ -1,6 +1,7 @@
 import { Flame, Lightbulb, ChevronLeft, ChevronRight, ShieldCheck, Crosshair } from 'lucide-react';
 import { useState } from 'react';
 import BrevetsModal from './BrevetsModal';
+import { useTranslation } from 'react-i18next'; // Import translation hook
 
 const chinaImages = [
   "/china.webp",
@@ -11,6 +12,7 @@ const chinaImages = [
 export default function WhatWeDo() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslation(); // Initialize hook
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % chinaImages.length);
@@ -26,13 +28,13 @@ export default function WhatWeDo() {
         
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-2 md:mb-4 leading-tight">
-            <span className="text-white">Qui Je </span>
+            <span className="text-white">{t('what_we_do.title_start')} </span>
             <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-              Suis
+              {t('what_we_do.title_end')}
             </span>
           </h2>
           <p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            David Leemans, pompier depuis 2006. Fort d'un passé militaire, je mets aujourd'hui deux décennies d'expertise de terrain au service de votre formation.
+            {t('what_we_do.intro')}
           </p>
         </div>
 
@@ -48,45 +50,48 @@ export default function WhatWeDo() {
 
           <div className="flex flex-col justify-center space-y-6 md:space-y-8">
             
+            {/* Card 1: Expertise */}
             <div className="flex items-start space-x-5 p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-red-900/10 hover:border-red-600/30 hover:bg-gray-800/50 transition-all duration-300">
               <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-red-900/20">
                 <Flame className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">Expertise & Engagement au Quotidien</h4>
+                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">{t('what_we_do.card_expertise_title')}</h4>
                 <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                  Actuellement Adjudant à la caserne d'Uccle (Bruxelles), j'assure la fonction de chef de section grâce à mon expérience de terrain. Passionné par l’évolution de notre métier, je poursuis ma formation d’Officier (OFF1).
+                  {t('what_we_do.card_expertise_text')}
                 </p>
               </div>
             </div>
 
+            {/* Card 2: Qualification (With Button inside text) */}
             <div className="flex items-start space-x-5 p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-red-900/10 hover:border-red-600/30 hover:bg-gray-800/50 transition-all duration-300">
               <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-red-900/20">
                 <ShieldCheck className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">Une Qualification Certifiée</h4>
+                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">{t('what_we_do.card_qualification_title')}</h4>
                 <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                  La transmission du savoir ne s'improvise pas. Je détiens{' '}
+                  {t('what_we_do.card_qualification_text_1')}{' '}
                   <button 
                     onClick={() => setIsModalOpen(true)}
                     className="text-red-400 font-semibold hover:text-red-300 hover:underline transition-all cursor-pointer focus:outline-none"
                   >
-                    l'ensemble des brevets
+                    {t('what_we_do.card_qualification_link')}
                   </button>
-                  {' '}et qualifications pédagogiques nécessaires pour garantir un enseignement conforme aux normes.
+                  {' '}{t('what_we_do.card_qualification_text_2')}
                 </p>
               </div>
             </div>
 
+            {/* Card 3: Specialization */}
             <div className="flex items-start space-x-5 p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-red-900/10 hover:border-red-600/30 hover:bg-gray-800/50 transition-all duration-300">
               <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-red-900/20">
                 <Crosshair className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">Spécialisation & Maîtrise Technique</h4>
+                <h4 className="text-lg md:text-xl font-semibold text-white mb-2">{t('what_we_do.card_specialization_title')}</h4>
                 <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                  Spécialiste du Secours Technique et de la Lutte Contre l'Incendie (LCI), je possède une expertise approfondie validée par mes brevets supérieurs.
+                  {t('what_we_do.card_specialization_text')}
                 </p>
               </div>
             </div>
@@ -94,25 +99,27 @@ export default function WhatWeDo() {
           </div>
         </div>
 
+        {/* China Section */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           <div className="flex flex-col justify-center space-y-6 order-2 lg:order-1">
             <h3 className="text-2xl text-center md:text-left md:text-4xl font-bold text-white leading-tight">
-              Une expertise sans frontières:{' '}
+              {t('what_we_do.china_title_prefix')}{' '}
               <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent mt-2">
-                Mon expérience en Chine
+                {t('what_we_do.china_title_suffix')}
               </span>
             </h3>
-            <p className="text-sm text-center md:text-left md:text-base text-gray-400 leading-relaxed">
-              Transmettre n'est pas seulement une profession pour moi, c'est une mission qui m'a conduit bien au-delà de nos frontières. J'ai eu l'opportunité unique d'être sollicité pour dispenser des formations de haut niveau en Chine.
-              <br /><br />
-              Cette expérience internationale fut un véritable catalyseur : Adaptabilité extrême, partage de techniques de pointe et confirmation de l'universalité de notre métier.
-            </p>
+            <div className="text-sm text-center md:text-left md:text-base text-gray-400 leading-relaxed">
+              <p>{t('what_we_do.china_text_1')}</p>
+              <br />
+              <p>{t('what_we_do.china_text_2')}</p>
+            </div>
+            
             <div className="flex items-start space-x-5 p-6 bg-gradient-to-r from-red-900/10 to-orange-900/10 rounded-xl border border-red-600/20">
               <Lightbulb className="w-8 h-8 text-red-500 flex-shrink-0 mt-1" />
               <div>
-                <h4 className="text-lg font-semibold text-white mb-2">Expertise Technique Exportée</h4>
+                <h4 className="text-lg font-semibold text-white mb-2">{t('what_we_do.china_card_title')}</h4>
                 <p className="text-sm md:text-base text-gray-400 leading-relaxed">
-                  Ma mission en Chine s'est concentrée sur le <strong>Sauvetage Technique Lourd</strong> et les protocoles de <strong>Lutte Contre l'Incendie (LCI)</strong> en milieu urbain dense.
+                  {t('what_we_do.china_card_text')}
                 </p>
               </div>
             </div>

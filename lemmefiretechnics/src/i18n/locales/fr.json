@@ -1,0 +1,147 @@
+{
+  "nav": {
+    "home": "ACCUEIL",
+    "formations": "FORMATIONS",
+    "gallery": "GALERIE",
+    "firefighters": "POMPIERS",
+    "civilians": "CIVILS"
+  },
+  "footer": {
+    "description": "Formation et éducation professionnelles à la sécurité incendie pour les pompiers et les civils.",
+    "quick_links": "Liens rapides",
+    "follow_us": "Suivez-nous",
+    "copyright": "Tous droits réservés.",
+    "created_by": "Créé avec passion par"
+  },
+  "brevets": {
+    "my_certifications": "Mes Certifications",
+    "back": "Retour",
+    "download": "Télécharger",
+    "view_cert": "Voir le certificat",
+    "authenticity_title": "Authenticité garantie",
+    "authenticity_text": "Tous les brevets présentés ici sont des copies numériques conformes aux originaux."
+  },
+  "hero": {
+    "badge": "Formation et Éducation Incendie Professionnelle",
+    "title_start": "Maîtrisez l'Art de la",
+    "title_end": "Sécurité Incendie",
+    "description": "Des formations spécifiques pour pompiers et civils, basées sur une expertise concrète du terrain. J'interviens partout en Belgique avec des programmes privés sur mesure.",
+    "cta_formations": "Voir les formations",
+    "cta_contact": "Contactez-moi",
+    "stat_experience": "Expérience",
+    "stat_students": "Étudiants",
+    "stat_brevets": "Brevets"
+  },
+  "what_we_do": {
+    "title_start": "Qui Je",
+    "title_end": "Suis",
+    "intro": "David Leemans, pompier depuis 2006. Fort d'un passé militaire, je mets aujourd'hui deux décennies d'expertise de terrain au service de votre formation.",
+    "card_expertise_title": "Expertise & Engagement au Quotidien",
+    "card_expertise_text": "Actuellement Adjudant à la caserne d'Uccle (Bruxelles), j'assure la fonction de chef de section grâce à mon expérience de terrain. Passionné par l’évolution de notre métier, je poursuis ma formation d’Officier (OFF1).",
+    "card_qualification_title": "Une Qualification Certifiée",
+    "card_qualification_text_1": "La transmission du savoir ne s'improvise pas. Je détiens",
+    "card_qualification_link": "l'ensemble des brevets",
+    "card_qualification_text_2": "et qualifications pédagogiques nécessaires pour garantir un enseignement conforme aux normes.",
+    "card_specialization_title": "Spécialisation & Maîtrise Technique",
+    "card_specialization_text": "Spécialiste du Secours Technique et de la Lutte Contre l'Incendie (LCI), je possède une expertise approfondie validée par mes brevets supérieurs.",
+    "china_title_prefix": "Une expertise sans frontières:",
+    "china_title_suffix": "Mon expérience en Chine",
+    "china_text_1": "Transmettre n'est pas seulement une profession pour moi, c'est une mission qui m'a conduit bien au-delà de nos frontières. J'ai eu l'opportunité unique d'être sollicité pour dispenser des formations de haut niveau en Chine.",
+    "china_text_2": "Cette expérience internationale fut un véritable catalyseur : Adaptabilité extrême, partage de techniques de pointe et confirmation de l'universalité de notre métier.",
+    "china_card_title": "Expertise Technique Exportée",
+    "china_card_text": "Ma mission en Chine s'est concentrée sur le Sauvetage Technique Lourd et les protocoles de Lutte Contre l'Incendie (LCI) en milieu urbain dense."
+  },
+  "home_formations": {
+    "title_start": "Ce Que",
+    "title_end": "J'offre",
+    "subtitle": "Choisissez le programme adapté à votre niveau d'expérience et à vos objectifs de carrière.",
+    "pro": {
+      "title": "Formations pour Pompiers",
+      "desc": "Des modules techniques, du perfectionnement à l'expertise avancée, destinés aux pompiers expérimentés désireux d'évoluer et d'optimiser leurs compétences opérationnelles.",
+      "point_1": "Désincarcération & Secours Routier",
+      "point_2": "Comportement du feu (CFBT / LCI)",
+      "point_3": "Techniques d'effraction & Forcement",
+      "point_4": "Sauvetage Déblaiement (USAR)",
+      "btn": "Voir les formations"
+    },
+    "civil": {
+      "title": "Formation pour Civils",
+      "desc": "Des programmes fondamentaux complets conçus pour les futurs aspirants pompiers ainsi que pour les entreprises souhaitant répondre à leurs obligations légales.",
+      "point_1": "Lutte contre l'incendie (EPI)",
+      "point_2": "Secourisme & Réanimation (AMU)",
+      "point_3": "Procédures d'évacuation",
+      "point_4": "Prévention & Analyse des risques",
+      "btn": "Voir les formations"
+    }
+  },
+  "contact": {
+    "title_start": "Prenez",
+    "title_end": "Contact",
+    "subtitle": "Des questions sur nos programmes de formation ? Envoyez-moi un message et je vous répondrai dès que possible.",
+    "info_title": "Mes Coordonnées",
+    "email_label": "E-mail",
+    "phone_label": "Téléphone",
+    "location_label": "Lieu de Formation",
+    "location_value": "Partout en Belgique",
+    "form_name": "Nom Complet",
+    "placeholder_name": "Jean Dupont",
+    "form_email": "E-mail",
+    "form_phone": "Téléphone",
+    "form_interested": "Intéressé(e) par",
+    "select_program": "Sélectionnez un programme",
+    "opt_pro": "Pompiers Professionnels",
+    "opt_civil": "Formation pour Civils",
+    "opt_general": "Demande Générale",
+    "form_specific": "Quelle formation spécifique ?",
+    "choose_formation": "Choisir une formation",
+    "form_message": "Message",
+    "placeholder_message": "Parlez-nous de vos objectifs de formation...",
+    "success_msg": "Merci ! Votre message a bien été envoyé. Nous vous recontacterons bientôt.",
+    "error_msg": "Une erreur est survenue. Veuillez réessayer ou nous envoyer un e-mail directement.",
+    "sending": "Envoi en cours...",
+    "send_btn": "Envoyer le Message"
+  },
+  "formations_list": {
+    "back_home": "Retour à l'accueil",
+    "title_prefix": "Formations",
+    "title_civilian": "Civiles",
+    "title_firefighter": "Pompiers",
+    "desc_civilian": "Acquérez les fondamentaux essentiels et préparez-vous efficacement à l'incendie.",
+    "desc_firefighter": "Des modules de perfectionnement technique avancés conçus spécifiquement pour les pompiers opérationnels.",
+    "brevet_required": "Brevet Applicable",
+    "see_details": "Voir les détails",
+    "no_formations": "Aucune formation disponible dans cette catégorie pour le moment."
+  },
+  "formation_detail": {
+    "back_formations": "Retour aux formations",
+    "about_course": "À propos de ce cursus",
+    "brevet_required": "Brevet Applicable",
+    "contact_us": "Nous contacter pour plus d'infos",
+    "duration": "Durée",
+    "sessions": "Séances",
+    "module": "Module",
+    "view_program": "VOIR LE PROGRAMME & S'INSCRIRE"
+  },
+  "level_detail": {
+    "certified_badge": "Formation Certifiante",
+    "module": "Module",
+    "description_title": "Description",
+    "goals_title": "But de la formation",
+    "competencies_title": "Compétences Clés",
+    "video_title": "Aperçu Vidéo",
+    "practical_details": "Détails Pratiques",
+    "duration": "Durée",
+    "frequency": "Fréquence",
+    "sessions_week": "sess/sem",
+    "certified": "Certifié",
+    "enroll_now": "S'INSCRIRE MAINTENANT",
+    "enroll_short": "S'INSCRIRE",
+    "disclaimer": "Places limitées. Validation des prérequis requise."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "civilian": "Civil",
+    "pro": "Pro",
+    "yes": "Oui"
+  }
+}

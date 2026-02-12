@@ -1,0 +1,147 @@
+{
+  "nav": {
+    "home": "HOME",
+    "formations": "OPLEIDINGEN",
+    "gallery": "GALERIJ",
+    "firefighters": "BRANDWEER",
+    "civilians": "BURGERS"
+  },
+  "footer": {
+    "description": "Professionele opleiding en educatie in brandveiligheid voor brandweerlieden en burgers.",
+    "quick_links": "Snelle Links",
+    "follow_us": "Volg ons",
+    "copyright": "Alle rechten voorbehouden.",
+    "created_by": "Gemaakt met passie door"
+  },
+  "brevets": {
+    "my_certifications": "Mijn Certificaten",
+    "back": "Terug",
+    "download": "Downloaden",
+    "view_cert": "Bekijk certificaat",
+    "authenticity_title": "Gegarandeerde Authenticiteit",
+    "authenticity_text": "Alle hier getoonde brevetten zijn digitale kopieën conform de originelen."
+  },
+  "hero": {
+    "badge": "Professionele Brandweeropleiding & Educatie",
+    "title_start": "Beheers de Kunst van",
+    "title_end": "Brandveiligheid",
+    "description": "Specifieke opleidingen voor brandweerlieden en burgers, gebaseerd op concrete terreinexpertise. Ik ben overal in België actief met op maat gemaakte privéprogramma's.",
+    "cta_formations": "Bekijk opleidingen",
+    "cta_contact": "Neem contact op",
+    "stat_experience": "Ervaring",
+    "stat_students": "Studenten",
+    "stat_brevets": "Brevetten"
+  },
+  "what_we_do": {
+    "title_start": "Wie Ik",
+    "title_end": "Ben",
+    "intro": "David Leemans, brandweerman sinds 2006. Met een militair verleden stel ik vandaag twee decennia terreinervaring ten dienste van uw opleiding.",
+    "card_expertise_title": "Expertise & Dagelijks Engagement",
+    "card_expertise_text": "Momenteel Adjudant in de kazerne van Ukkel (Brussel), verzeker ik de functie van sectiechef dankzij mijn terreinervaring. Gepassioneerd door de evolutie van ons vak, volg ik momenteel de opleiding tot Officier (OFF1).",
+    "card_qualification_title": "Gecertificeerde Kwalificatie",
+    "card_qualification_text_1": "Kennisoverdracht improviseer je niet. Ik bezit",
+    "card_qualification_link": "alle brevetten",
+    "card_qualification_text_2": "en pedagogische kwalificaties die nodig zijn om onderwijs volgens de normen te garanderen.",
+    "card_specialization_title": "Specialisatie & Technische Beheersing",
+    "card_specialization_text": "Specialist in Technische Hulpverlening en Brandbestrijding (LCI), bezit ik een diepgaande expertise gevalideerd door mijn hogere brevetten.",
+    "china_title_prefix": "Expertise zonder grenzen:",
+    "china_title_suffix": "Mijn ervaring in China",
+    "china_text_1": "Kennis doorgeven is voor mij niet zomaar een beroep, het is een missie die me tot ver buiten onze grenzen heeft gebracht. Ik kreeg de unieke kans om opleidingen van hoog niveau te geven in China.",
+    "china_text_2": "Deze internationale ervaring was een echte katalysator: Extreme aanpasbaarheid, delen van geavanceerde technieken en bevestiging van de universaliteit van ons vak.",
+    "china_card_title": "Geëxporteerde Technische Expertise",
+    "china_card_text": "Mijn missie in China concentreerde zich op Zware Technische Redding en protocollen voor Brandbestrijding (LCI) in dichtstedelijk gebied."
+  },
+  "home_formations": {
+    "title_start": "Wat Ik",
+    "title_end": "Aanbied",
+    "subtitle": "Kies het programma dat past bij uw ervaringsniveau en carrièredoelen.",
+    "pro": {
+      "title": "Opleidingen voor Brandweer",
+      "desc": "Technische modules, van bijscholing tot geavanceerde expertise, bedoeld voor ervaren brandweerlieden die willen groeien en hun operationele vaardigheden willen optimaliseren.",
+      "point_1": "Bevrijdingstechnieken & THV",
+      "point_2": "Brandgedrag (CFBT / LCI)",
+      "point_3": "Forceertechnieken & Toegang",
+      "point_4": "Redden en Ruimen (USAR)",
+      "btn": "Bekijk opleidingen"
+    },
+    "civil": {
+      "title": "Opleiding voor Burgers",
+      "desc": "Volledige basisprogramma's ontworpen voor toekomstige aspirant-brandweerlieden en voor bedrijven die aan hun wettelijke verplichtingen willen voldoen.",
+      "point_1": "Brandbestrijding (EIP)",
+      "point_2": "EHBO & Reanimatie (DGH)",
+      "point_3": "Evacuatieprocedures",
+      "point_4": "Preventie & Risicoanalyse",
+      "btn": "Bekijk opleidingen"
+    }
+  },
+  "contact": {
+    "title_start": "Neem",
+    "title_end": "Contact Op",
+    "subtitle": "Vragen over onze opleidingsprogramma's? Stuur me een bericht en ik antwoord zo snel mogelijk.",
+    "info_title": "Mijn Gegevens",
+    "email_label": "E-mail",
+    "phone_label": "Telefoon",
+    "location_label": "Opleidingslocatie",
+    "location_value": "Overal in België",
+    "form_name": "Volledige Naam",
+    "placeholder_name": "Jan Janssen",
+    "form_email": "E-mail",
+    "form_phone": "Telefoon",
+    "form_interested": "Geïnteresseerd in",
+    "select_program": "Selecteer een programma",
+    "opt_pro": "Professionele Brandweer",
+    "opt_civil": "Opleiding voor Burgers",
+    "opt_general": "Algemene Vraag",
+    "form_specific": "Welke specifieke opleiding?",
+    "choose_formation": "Kies een opleiding",
+    "form_message": "Bericht",
+    "placeholder_message": "Vertel ons over uw opleidingsdoelen...",
+    "success_msg": "Bedankt! Uw bericht is verzonden. We nemen binnenkort contact met u op.",
+    "error_msg": "Er is een fout opgetreden. Probeer het opnieuw of stuur ons direct een e-mail.",
+    "sending": "Verzenden...",
+    "send_btn": "Verstuur Bericht"
+  },
+  "formations_list": {
+    "back_home": "Terug naar start",
+    "title_prefix": "Opleidingen",
+    "title_civilian": "Burgers",
+    "title_firefighter": "Brandweer",
+    "desc_civilian": "Leer de essentiële basisprincipes en bereid u effectief voor op brand.",
+    "desc_firefighter": "Geavanceerde technische vervolmakingsmodules specifiek ontworpen voor operationele brandweerlieden.",
+    "brevet_required": "Vereist Brevet",
+    "see_details": "Bekijk details",
+    "no_formations": "Momenteel geen opleidingen beschikbaar in deze categorie."
+  },
+  "formation_detail": {
+    "back_formations": "Terug naar opleidingen",
+    "about_course": "Over deze cursus",
+    "brevet_required": "Vereist Brevet",
+    "contact_us": "Neem contact op voor meer info",
+    "duration": "Duur",
+    "sessions": "Sessies",
+    "module": "Module",
+    "view_program": "BEKIJK PROGRAMMA & INSCHRIJVEN"
+  },
+  "level_detail": {
+    "certified_badge": "Gecertificeerde Opleiding",
+    "module": "Module",
+    "description_title": "Beschrijving",
+    "goals_title": "Doel van de opleiding",
+    "competencies_title": "Sleutelvaardigheden",
+    "video_title": "Video-overzicht",
+    "practical_details": "Praktische Details",
+    "duration": "Duur",
+    "frequency": "Frequentie",
+    "sessions_week": "sessies/week",
+    "certified": "Gecertificeerd",
+    "enroll_now": "NU INSCHRIJVEN",
+    "enroll_short": "INSCHRIJVEN",
+    "disclaimer": "Beperkte plaatsen. Validatie van vereisten noodzakelijk."
+  },
+  "common": {
+    "loading": "Laden...",
+    "civilian": "Burger",
+    "pro": "Pro",
+    "yes": "Ja"
+  }
+}

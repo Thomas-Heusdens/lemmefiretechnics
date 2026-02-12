@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { X, FileText, Download, Shield, ArrowLeft, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useTranslation } from 'react-i18next'; // Import translation hook
 
 interface Brevet {
   id: string;
-  name: string;
-  description: string,
-  category: string;
   pdf_url: string;
+  // Multilingual Fields
+  name_fr: string; name_nl: string;
+  description_fr: string; description_nl: string;
+  category_fr: string; category_nl: string;
 }
 
 interface BrevetsModalProps {
@@ -19,6 +21,16 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
   const [loading, setLoading] = useState(true);
   const [groupedBrevets, setGroupedBrevets] = useState<Record<string, Brevet[]>>({});
   const [selectedPdf, setSelectedPdf] = useState<Brevet | null>(null);
+
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language.split('-')[0]; // 'fr' or 'nl'
+
+  // Helper to get translated content safely
+  const getContent = (obj: any, field: string) => {
+    if (!obj) return '';
+    const val = obj[`${field}_${currentLang}`];
+    return val || obj[`${field}_fr`]; // Fallback to French
+  };
 
   // Lock body scroll when open
   useEffect(() => {
@@ -38,18 +50,22 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
           const { data, error } = await supabase
             .from('brevets')
             .select('*')
-            .order('category', { ascending: true })
-            .order('name', { ascending: true });
+            // Order by French category initially, we'll group dynamically later
+            .order('category_fr', { ascending: true }) 
+            .order('name_fr', { ascending: true });
 
           if (error) throw error;
 
           if (data) {
             const grouped = data.reduce((acc, brevet) => {
-              const cat = brevet.category || 'Autres';
+              // Group by the localized category name
+              const cat = getContent(brevet, 'category') || 'Autres';
+              
               if (!acc[cat]) acc[cat] = [];
               acc[cat].push(brevet);
               return acc;
             }, {} as Record<string, Brevet[]>);
+            
             setGroupedBrevets(grouped);
           }
         } catch (err) {
@@ -60,7 +76,7 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
       };
       fetchBrevets();
     }
-  }, [isOpen]);
+  }, [isOpen, currentLang]); // Re-fetch/Re-group when language changes
 
   const handleClose = () => {
     setSelectedPdf(null);
@@ -78,6 +94,7 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
 
       <div className="relative w-full max-w-5xl h-[85vh] bg-gray-950 rounded-2xl shadow-2xl border border-gray-800 flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
         
+        {/* Header */}
         <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-gray-800 bg-gray-900">
           <div className="flex items-center space-x-3">
             {selectedPdf ? (
@@ -86,12 +103,12 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
-                <span className="hidden sm:inline text-sm font-medium">Retour</span>
+                <span className="hidden sm:inline text-sm font-medium">{t('brevets.back', 'Retour')}</span>
               </button>
             ) : (
               <div className="flex items-center space-x-3">
                 <Shield className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
-                <h3 className="text-lg md:text-xl font-bold text-white">Mes Certifications</h3>
+                <h3 className="text-lg md:text-xl font-bold text-white">{t('brevets.my_certifications', 'Mes Certifications')}</h3>
               </div>
             )}
           </div>
@@ -110,14 +127,14 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
           {loading ? (
             <div className="flex flex-col items-center justify-center h-full space-y-4">
               <Loader2 className="w-8 h-8 text-red-500 animate-spin" />
-              <p className="text-gray-400">Chargement des brevets...</p>
+              <p className="text-gray-400">{t('common.loading', 'Chargement...')}</p>
             </div>
           ) : selectedPdf ? (
             // PDF VIEW
             <div className="w-full h-full flex flex-col">
               <div className="px-6 py-3 bg-gray-900/50 border-b border-gray-800 flex justify-between items-center text-sm">
                 <span className="text-white font-medium truncate max-w-[200px] md:max-w-md">
-                  {selectedPdf.name}
+                  {getContent(selectedPdf, 'name')}
                 </span>
                 <a 
                   href={selectedPdf.pdf_url} 
@@ -125,7 +142,7 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
                   className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors"
                 >
                   <Download className="w-4 h-4" />
-                  <span className="hidden sm:inline">Télécharger</span>
+                  <span className="hidden sm:inline">{t('brevets.download', 'Télécharger')}</span>
                 </a>
               </div>
               <iframe 
@@ -153,10 +170,10 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
                           <FileText className="w-5 h-5 text-gray-500 group-hover:text-red-500 mt-0.5 mr-3 transition-colors shrink-0" />
                           <div>
                             <div className="text-sm md:text-base text-gray-300 group-hover:text-white font-medium transition-colors">
-                              {brevet.name}
+                              {getContent(brevet, 'name')}
                             </div>
                             <div className="text-xs text-gray-500 mt-1 line-clamp-1">
-                              {brevet.description || 'Voir le certificat'}
+                              {getContent(brevet, 'description') || t('brevets.view_cert', 'Voir le certificat')}
                             </div>
                           </div>
                         </button>
@@ -172,9 +189,9 @@ export default function BrevetsModal({ isOpen, onClose }: BrevetsModalProps) {
                   <Shield className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1 text-sm md:text-base">Authenticité garantie</h4>
+                  <h4 className="text-white font-semibold mb-1 text-sm md:text-base">{t('brevets.authenticity_title', 'Authenticité garantie')}</h4>
                   <p className="text-xs md:text-sm text-gray-400">
-                    Tous les brevets présentés ici sont des copies numériques conformes aux originaux.
+                    {t('brevets.authenticity_text', 'Tous les brevets présentés ici sont des copies numériques conformes aux originaux.')}
                   </p>
                 </div>
               </div>
