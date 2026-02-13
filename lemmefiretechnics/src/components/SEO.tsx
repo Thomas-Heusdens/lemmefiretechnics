@@ -13,7 +13,7 @@ export default function SEO({ title, description, image, type = 'website' }: SEO
   const currentLang = i18n.language.split('-')[0]; // 'fr' or 'nl'
   
   // ⚠️ CHANGE THIS to your real domain when you buy it
-  const siteUrl = 'https://www.lemmefiretechnics.com'; 
+  const siteUrl = 'https://lemmefiretechnics.vercel.app/'; 
   const siteName = 'Lemme Fire Technics';
   
   // Logic: Only add suffix if the title is NOT the site name
