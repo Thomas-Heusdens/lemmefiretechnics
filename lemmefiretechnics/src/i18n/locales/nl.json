@@ -152,5 +152,24 @@
     "civilian": "Burger",
     "pro": "Brandweerman",
     "yes": "Ja"
+  },
+  "seo": {
+    "home": {
+      "description": "David Leemans: Professionele opleidingen voor brandweer en burgers. Brevetten, brandveiligheid, technische hulpverlening en crisisbeheer in België."
+    },
+    "gallery": {
+      "title": "Fotogalerij",
+      "description": "Ontdek onze praktische oefeningen in beeld: real fire training, bevrijding, GRIMP en geavanceerd materiaal."
+    },
+    "formations_list": {
+      "pro": {
+        "title": "Opleidingen Professionele Brandweer",
+        "description": "Catalogus technische opleidingen voor brandweerlieden: CFBT, Technische Hulpverlening, Deurforcering en USAR."
+      },
+      "civil": {
+        "title": "Opleidingen Civiele Veiligheid",
+        "description": "Opleidingen voor bedrijven en particulieren: Eerste Interventieploeg (EIP), Dringende Geneeskundige Hulp (DGH) en brandpreventie."
+      }
+    }
   }
 }

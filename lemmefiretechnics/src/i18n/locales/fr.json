@@ -152,5 +152,24 @@
     "civilian": "Civil",
     "pro": "Pompier",
     "yes": "Oui"
+  },
+  "seo": {
+    "home": {
+      "description": "David Leemans: Formations professionnelles pour pompiers et civils. Brevets, sécurité incendie, secours technique et gestion de crise en Belgique."
+    },
+    "gallery": {
+      "title": "Galerie Photos",
+      "description": "Découvrez nos exercices pratiques en images : feu réel, désincarcération, GRIMP et matériel de pointe."
+    },
+    "formations_list": {
+      "pro": {
+        "title": "Formations Pompiers Professionnels",
+        "description": "Catalogue de formations techniques pour sapeurs-pompiers : CFBT, Secours Routier, Forcement et Sauvetage Déblaiement."
+      },
+      "civil": {
+        "title": "Formations Sécurité Civile",
+        "description": "Formations pour entreprises et particuliers : Équipier de Première Intervention (EPI), Secourisme (AMU) et prévention incendie."
+      }
+    }
   }
 }

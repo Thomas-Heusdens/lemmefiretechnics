@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { ChevronLeft, ChevronRight, Lock, Clock, Calendar, TrendingUp, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next'; // Import translation hook
+import SEO from './SEO';
 
 // Updated Interfaces to match DB Schema
 interface FormationLevel {
@@ -138,6 +139,10 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black pt-32 pb-20">
+      <SEO 
+        title={getContent(formation, 'name')} 
+        description={getContent(formation, 'description')}
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         <button
           onClick={onBack}

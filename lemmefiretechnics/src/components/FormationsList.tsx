@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { ArrowRight, Lock, Loader2, ChevronLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import SEO from './SEO';
 
 // Updated Interface to match DB (with _fr and _nl)
 interface Formation {
@@ -37,6 +38,7 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
   const [loading, setLoading] = useState(true);
   
   const { t, i18n } = useTranslation();
+  const seoKey = category === 'firefighter' ? 'pro' : 'civil';
   
   // Extract simple language code ('fr' or 'nl')
   const currentLang = i18n.language.split('-')[0]; 
@@ -99,6 +101,10 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black pt-32 pb-20">
+      <SEO 
+        title={t(`seo.formations_list.${seoKey}.title`)} 
+        description={t(`seo.formations_list.${seoKey}.description`)} 
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         
         <button

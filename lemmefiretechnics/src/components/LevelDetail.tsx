@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, CheckCircle2, Calendar, Clock, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 import { useTranslation } from 'react-i18next'; // 1. Import hook
+import SEO from './SEO';
 
 interface LevelDetailProps {
   // DB Fields (New Multilingual Schema)
@@ -93,6 +94,10 @@ export default function LevelDetail({
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-950 animate-in fade-in duration-300 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-red-900 scrollbar-track-black">
+      <SEO 
+        title={`${title} | ${formationName}`}
+        description={description}
+      />
       <div className="fixed inset-0 bg-gradient-to-b from-black via-gray-900 to-black pointer-events-none -z-10"></div>
       
       {/* CLOSE BUTTON */}

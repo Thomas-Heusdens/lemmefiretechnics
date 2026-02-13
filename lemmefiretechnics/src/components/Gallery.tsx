@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { X, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useTranslation } from 'react-i18next';
+import SEO from './SEO';
 
 type GalleryImage = {
   id: string;
@@ -143,6 +144,10 @@ export default function Gallery() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black pt-32 pb-20">
+      <SEO 
+        title={t('seo.gallery.title')} 
+        description={t('seo.gallery.description')} 
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         
         <div className="text-center mb-8 md:mb-12">
