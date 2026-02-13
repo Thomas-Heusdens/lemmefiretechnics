@@ -138,10 +138,19 @@
     "enroll_short": "S'INSCRIRE",
     "disclaimer": "Places limitées. Validation des prérequis requise."
   },
+  "gallery": {
+    "title_start": "Galerie",
+    "title_end": "Photos",
+    "subtitle": "Découvrez nos sessions de formation pratique, nos installations de pointe et le dévouement de nos étudiants.",
+    "cat_all": "Tout",
+    "cat_training": "Entraînement",
+    "cat_equipment": "Équipement",
+    "extra_image_title": "Photo de Formation"
+  },
   "common": {
     "loading": "Chargement...",
     "civilian": "Civil",
-    "pro": "Pro",
+    "pro": "Pompier",
     "yes": "Oui"
   }
 }

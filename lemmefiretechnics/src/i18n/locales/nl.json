@@ -138,10 +138,19 @@
     "enroll_short": "INSCHRIJVEN",
     "disclaimer": "Beperkte plaatsen. Validatie van vereisten noodzakelijk."
   },
+  "gallery": {
+    "title_start": "Foto",
+    "title_end": "Galerij",
+    "subtitle": "Ontdek onze praktische opleidingssessies, onze moderne faciliteiten en de toewijding van onze studenten.",
+    "cat_all": "Alles",
+    "cat_training": "Training",
+    "cat_equipment": "Uitrusting",
+    "extra_image_title": "Opleidingsfoto"
+  },
   "common": {
     "loading": "Laden...",
     "civilian": "Burger",
-    "pro": "Pro",
+    "pro": "Brandweerman",
     "yes": "Ja"
   }
 }
