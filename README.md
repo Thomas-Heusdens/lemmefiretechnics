@@ -113,6 +113,6 @@ This project is optimized for deployment on **Vercel**.
 **Thomas Heusdens**
 
 * [LinkedIn](https://www.linkedin.com/in/thomas-heusdens-0bba19258/)
-* [GitHub](https://www.google.com/search?q=https://github.com/ThomasHeusdens)
+* [GitHub](https://github.com/Thomas-Heusdens)
 
 Created for **Lemme Fire Technics** © 2024.
