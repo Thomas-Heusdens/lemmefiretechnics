@@ -2,7 +2,7 @@
 
 A modern, bilingual (FR/NL) Single Page Application (SPA) built for **David Leemans**, a professional firefighter and instructor. This platform showcases fire safety training courses for both professional firefighters and civilians, featuring dynamic content management and SEO optimization.
 
-![Project Banner](public/og-default.jpg)
+![Project Banner](https://github.com/Thomas-Heusdens/lemmefiretechnics/blob/main/lemmefiretechnics/public/og-default.jpg)
 
 ## 🚀 Tech Stack
 
