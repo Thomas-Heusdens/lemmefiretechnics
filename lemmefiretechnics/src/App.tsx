@@ -16,17 +16,21 @@ import Formations from './components/Formations';
 
 // --- HOME COMPONENT ---
 function Home() {
-  const { t } = useTranslation(); // <--- 3. Initialize hook for Home translations
+  const { t } = useTranslation();
   const location = useLocation();
   const formationsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (location.hash === '#contact') {
-      contactRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else if (location.hash === '#formations') {
-      formationsRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
+    const timer = setTimeout(() => {
+      if (location.hash === '#contact') {
+        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+      } else if (location.hash === '#formations') {
+        formationsRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [location]);
 
   const scrollToFormations = () => {
@@ -66,11 +70,13 @@ function Home() {
 
 // --- MAIN APP COMPONENT ---
 function App() {
-  const { pathname } = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col">

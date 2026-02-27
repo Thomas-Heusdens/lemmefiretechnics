@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase';
 import { ArrowRight, Lock, Loader2, ChevronLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import SEO from './SEO';
+import BrevetsModal from './BrevetsModal';
 
 // Updated Interface to match DB (with _fr and _nl)
 interface Formation {
@@ -36,6 +37,7 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
   const [formations, setFormations] = useState<Formation[]>([]);
   const [brevets, setBrevets] = useState<Record<string, Brevet>>({});
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const { t, i18n } = useTranslation();
   const seoKey = category === 'firefighter' ? 'pro' : 'civil';
@@ -165,17 +167,23 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
                   </p>
 
                   {formation.brevet_id && brevets[formation.brevet_id] && (
-                    <div className="mb-4 md:mb-6 p-3 bg-red-950/30 border border-red-900/30 rounded-lg flex items-start gap-3">
-                      <Lock className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsModalOpen(true);
+                      }}
+                      className="mb-4 md:mb-6 p-3 w-full text-left bg-red-950/30 border border-red-900/30 hover:bg-red-900/40 hover:border-red-600/50 rounded-lg flex items-start gap-3 transition-all duration-300 cursor-pointer focus:outline-none group/brevet"
+                    >
+                      <Lock className="w-4 h-4 text-red-500 group-hover/brevet:text-red-400 flex-shrink-0 mt-0.5 transition-colors" />
                       <div>
-                        <div className="text-xs text-red-400 font-bold tracking-wide mb-0.5">
+                        <div className="text-xs text-red-400 group-hover/brevet:text-red-300 font-bold tracking-wide mb-0.5 transition-colors">
                           {t('formations_list.brevet_required', 'Brevet Applicable')}
                         </div>
-                        <div className="text-sm text-red-200 font-medium leading-tight">
+                        <div className="text-sm text-red-200 group-hover/brevet:text-white font-medium leading-tight transition-colors">
                           {getContent(brevets[formation.brevet_id], 'name')}
                         </div>
                       </div>
-                    </div>
+                    </button>
                   )}
 
                   <div className="mt-auto">
@@ -200,6 +208,7 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
           </div>
         )}
       </div>
+      <BrevetsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

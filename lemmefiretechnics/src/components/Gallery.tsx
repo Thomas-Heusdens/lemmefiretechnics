@@ -16,14 +16,68 @@ type GalleryImage = {
 const STATIC_IMAGES: GalleryImage[] = [
   {
     id: 'static-1',
-    url: 'https://images.pexels.com/photos/3867340/pexels-photo-3867340.jpeg?auto=compress&cs=tinysrgb&w=800',
-    title: 'Exercice à Feu Réel',
-    category: 'training',
+    url: '/materiel/burned_helmet.webp',
+    title: 'Casque Brulé',
+    category: 'equipment',
   },
   {
     id: 'static-2',
-    url: 'https://images.pexels.com/photos/280076/pexels-photo-280076.jpeg?auto=compress&cs=tinysrgb&w=800',
-    title: 'Vérification Matériel',
+    url: '/materiel/camion.jpeg',
+    title: 'Camion Pompier',
+    category: 'equipment',
+  },
+  {
+    id: 'static-3',
+    url: '/materiel/helmet.jpg',
+    title: 'Casque Pompier',
+    category: 'equipment',
+  },
+  {
+    id: 'static-4',
+    url: '/materiel/materiel_1.jpeg',
+    title: 'Préparation des Bonbonnes d\'Oxigen',
+    category: 'equipment',
+  },
+  {
+    id: 'static-5',
+    url: '/materiel/materiel_2.webp',
+    title: 'Tronçonneuse',
+    category: 'equipment',
+  },
+  {
+    id: 'static-6',
+    url: '/materiel/materiel_3.jpeg',
+    title: 'Pompe pour Voiture',
+    category: 'equipment',
+  },
+  {
+    id: 'static-7',
+    url: '/materiel/materiel_4.jpeg',
+    title: 'Coupe Bois',
+    category: 'equipment',
+  },
+  {
+    id: 'static-8',
+    url: '/materiel/materiel_5.jpeg',
+    title: 'Coupe Voiture',
+    category: 'equipment',
+  },
+  {
+    id: 'static-9',
+    url: '/materiel/materiel_6.jpeg',
+    title: 'Casque & Veste Pompier',
+    category: 'equipment',
+  },
+  {
+    id: 'static-10',
+    url: '/materiel/materiel_7.jpeg',
+    title: 'Cône',
+    category: 'equipment',
+  },
+  {
+    id: 'static-11',
+    url: '/materiel/materiel_8.jpeg',
+    title: 'Sac de Pompier',
     category: 'equipment',
   },
 ];

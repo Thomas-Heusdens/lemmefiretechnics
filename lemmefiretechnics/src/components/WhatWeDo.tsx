@@ -4,9 +4,12 @@ import BrevetsModal from './BrevetsModal';
 import { useTranslation } from 'react-i18next'; // Import translation hook
 
 const chinaImages = [
-  "/china.webp",
-  "/China2.webp",
-  "/china_group.webp",
+  "/chine/cours_3.jpeg",
+  "/chine/cours_2.jpeg",
+  "/chine/group_photo_4.jpeg",
+  "/chine/cours_1.webp",
+  "/chine/voiture_3.jpeg",
+  "/chine/group_photo_6.jpeg",
 ];
 
 export default function WhatWeDo() {
@@ -41,9 +44,10 @@ export default function WhatWeDo() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mb-8">
           <div className="relative h-80 md:h-[500px] lg:h-full rounded-2xl overflow-hidden group shadow-2xl shadow-black/50">
             <img
-                src="https://images.pexels.com/photos/6519876/pexels-photo-6519876.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Fire training exercise"
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                src="/david/david_main.jpeg"
+                alt="David Leemans"
+                // ADDED: absolute inset-0 to prevent the image from forcing its own height
+                className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
           </div>

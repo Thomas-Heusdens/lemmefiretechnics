@@ -14,7 +14,7 @@ export default function Hero({ onScrollToContact, onScrollToFormations }: HeroPr
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      <div className="absolute inset-0 z-0" style={{ backgroundImage: 'url("/hero.webp")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="absolute inset-0 z-0" style={{ backgroundImage: 'url("/feu/hero.webp")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-red-900/40"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black"></div>
       </div>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { ChevronLeft, ChevronRight, Lock, Clock, Calendar, TrendingUp, Loader2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next'; // Import translation hook
+import { useTranslation } from 'react-i18next';
 import SEO from './SEO';
+import BrevetsModal from './BrevetsModal';
 
 // Updated Interfaces to match DB Schema
 interface FormationLevel {
@@ -51,6 +52,7 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language.split('-')[0]; // 'fr' or 'nl'
@@ -187,23 +189,26 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
             </div>
 
             {brevet && (
-              <div className="p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-red-900/30 rounded-2xl flex items-start gap-5 shadow-lg relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-red-600/20 transition-all"></div>
-                <div className="p-3 bg-red-500/10 rounded-xl border border-red-500/20 text-red-500">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="w-full text-left p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-red-900/30 rounded-2xl flex items-start gap-5 shadow-lg relative overflow-hidden group hover:border-red-600/50 transition-all duration-300 cursor-pointer focus:outline-none"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-red-600/30 transition-all"></div>
+                <div className="p-3 bg-red-500/10 rounded-xl border border-red-500/20 text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300">
                   <Lock className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-red-400 font-bold tracking-wide text-xs mb-1">
                     {t('formation_detail.brevet_required', 'Brevet Applicable')}
                   </h4>
-                  <div className="text-xl font-bold text-white mb-1">
+                  <div className="text-xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors duration-300">
                     {getContent(brevet, 'name')}
                   </div>
                   <p className="text-sm text-gray-400">
                     {getContent(brevet, 'description')}
                   </p>
                 </div>
-              </div>
+              </button>
             )}
 
             {levels.length === 0 && (
@@ -350,6 +355,7 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
           )}
         </div>
       </div>
+      <BrevetsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
