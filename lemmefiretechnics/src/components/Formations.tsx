@@ -63,7 +63,7 @@ const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySele
 
               <div className="relative h-40 md:h-48 mb-6 rounded-xl overflow-hidden shrink-0">
                 <img
-                  src="/voiture/demontage_4.webp"
+                  src="/st_vl/car_in_truck.jpg"
                   alt="Car dismantling"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />

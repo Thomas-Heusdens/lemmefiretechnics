@@ -12,6 +12,21 @@ type GalleryImage = {
   category: string;
 };
 
+type Category = {
+  id: string;
+  label: string;
+};
+
+// Standard Fisher-Yates shuffle algorithm for truly random mixing
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 // Static images (Legacy)
 const STATIC_IMAGES: GalleryImage[] = [
   {
@@ -52,7 +67,7 @@ const STATIC_IMAGES: GalleryImage[] = [
   },
   {
     id: 'static-7',
-    url: '/materiel/materiel_4.jpeg',
+    url: '/groupe/talk_1.webp',
     title: 'Coupe Bois',
     category: 'equipment',
   },
@@ -87,6 +102,7 @@ export default function Gallery() {
   const currentLang = i18n.language.split('-')[0];
 
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [filter, setFilter] = useState<string>('all');
   const [loading, setLoading] = useState(true);
@@ -111,7 +127,7 @@ export default function Gallery() {
 
         const { data: formations } = await supabase
           .from('formations')
-          .select('id, image_url, name_fr, name_nl, category, image_desc_fr, image_desc_nl');
+          .select('id, image_url, name_fr, name_nl, image_desc_fr, image_desc_nl');
 
         const { data: levels } = await supabase
           .from('formation_levels')
@@ -119,33 +135,44 @@ export default function Gallery() {
 
         const { data: extras } = await supabase
           .from('level_images')
-          .select('id, image_url, description_fr, description_nl');
+          .select('id, image_url, description_fr, description_nl, level_id'); 
 
         let dynamicImages: GalleryImage[] = [];
+        
+        // Build dynamic categories from formations
+        const dynamicCategories: Category[] = [
+          { id: 'all', label: t('gallery.cat_all', 'Tout') },
+          { id: 'equipment', label: t('gallery.cat_equipment', 'Équipement') }
+        ];
 
         if (formations) {
           formations.forEach((f: any) => {
-            if (f.image_url) {
-              dynamicImages.push({
-                id: `formation-${f.id}`,
-                url: f.image_url,
-                title: getContent(f, 'name'),
-                description: getContent(f, 'image_desc'),
-                category: f.category === 'civilian' ? 'civilian' : 'pro',
-              });
-            }
+            // ONLY add formation to our filters, skip adding its image to prevent duplicates
+            dynamicCategories.push({
+              id: f.id,
+              label: getContent(f, 'name')
+            });
           });
         }
+        
+        setCategories(dynamicCategories);
+
+        // Map levels to their parent formations for fast lookup
+        const levelToFormation: Record<string, string> = {};
 
         if (levels) {
           levels.forEach((l: any) => {
+            if (l.formation_id) {
+              levelToFormation[l.id] = l.formation_id;
+            }
+
             if (l.image_url) {
               dynamicImages.push({
                 id: `level-${l.id}`,
                 url: l.image_url,
                 title: getContent(l, 'name'),
                 description: getContent(l, 'image_desc'),
-                category: 'training',
+                category: l.formation_id, 
               });
             }
           });
@@ -153,18 +180,29 @@ export default function Gallery() {
 
         if (extras) {
           extras.forEach((e: any) => {
-            if (e.image_url) {
+            const parentFormationId = levelToFormation[e.level_id];
+            if (e.image_url && parentFormationId) {
               dynamicImages.push({
                 id: `extra-${e.id}`,
                 url: e.image_url,
                 title: t('gallery.extra_image_title', 'Galerie'),
                 description: getContent(e, 'description'),
-                category: 'training',
+                category: parentFormationId, 
               });
             }
           });
         }
-        setImages([...STATIC_IMAGES, ...dynamicImages]);
+        
+        // Combine all images
+        const allImages = [...STATIC_IMAGES, ...dynamicImages];
+        
+        // Bulletproof Deduplication: Ensure no two images have the exact same URL
+        const uniqueImages = Array.from(new Map(allImages.map(img => [img.url, img])).values());
+        
+        // Apply the shuffle algorithm to the clean list
+        const mixedImages = shuffleArray(uniqueImages);
+        
+        setImages(mixedImages);
 
       } catch (error) {
         console.error("Error loading gallery:", error);
@@ -174,19 +212,17 @@ export default function Gallery() {
     };
 
     fetchGalleryData();
-  }, [currentLang]);
-
-  const categories = [
-    { id: 'all', label: t('gallery.cat_all', 'Tout') },
-    { id: 'training', label: t('gallery.cat_training', 'Entraînement') },
-    { id: 'equipment', label: t('gallery.cat_equipment', 'Équipement') },
-    { id: 'pro', label: t('common.pro', 'Pro') },
-    { id: 'civilian', label: t('common.civilian', 'Civil') },
-  ];
+  }, [currentLang, t]);
 
   const filteredImages = filter === 'all'
     ? images
     : images.filter(img => img.category === filter);
+
+  // Helper to get the translated name for the image badge
+  const getCategoryLabel = (categoryId: string) => {
+    const category = categories.find(c => c.id === categoryId);
+    return category ? category.label : categoryId;
+  };
 
   if (loading) {
     return (
@@ -216,7 +252,7 @@ export default function Gallery() {
           </p>
         </div>
 
-        {/* FILTERS */}
+        {/* DYNAMIC FILTERS */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => (
             <button
@@ -250,11 +286,8 @@ export default function Gallery() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                 <h3 className="text-white font-semibold text-lg mb-1 truncate">{image.title}</h3>
-                <span className="inline-block px-2 py-1 bg-red-600/20 border border-red-500/30 rounded-full text-red-400 text-xs font-medium uppercase">
-                  {image.category === 'training' ? t('gallery.cat_training') : 
-                   image.category === 'equipment' ? t('gallery.cat_equipment') :
-                   image.category === 'pro' ? t('common.pro') :
-                   image.category === 'civilian' ? t('common.civilian') : image.category}
+                <span className="inline-block px-2 py-1 bg-red-600/20 border border-red-500/30 rounded-full text-red-400 text-xs font-medium uppercase truncate max-w-full">
+                  {getCategoryLabel(image.category)}
                 </span>
               </div>
             </div>
@@ -281,7 +314,7 @@ export default function Gallery() {
                 />
             </div>
 
-            {/* Info Sidebar (Visible on Desktop, Bottom on Mobile) */}
+            {/* Info Sidebar */}
             <div className="w-full md:w-80 bg-gray-900 p-6 md:p-8 flex flex-col justify-center border-t md:border-t-0 md:border-l border-white/10">
                 <h3 className="text-white font-bold text-xl md:text-2xl mb-4 leading-tight">
                     {selectedImage.title}
@@ -289,10 +322,7 @@ export default function Gallery() {
                 
                 <div className="mb-6">
                     <span className="inline-block px-3 py-1 bg-red-600/20 border border-red-500/30 rounded-full text-red-400 text-xs font-bold uppercase tracking-wider">
-                        {selectedImage.category === 'training' ? t('gallery.cat_training') : 
-                         selectedImage.category === 'equipment' ? t('gallery.cat_equipment') :
-                         selectedImage.category === 'pro' ? t('common.pro') :
-                         selectedImage.category === 'civilian' ? t('common.civilian') : selectedImage.category}
+                        {getCategoryLabel(selectedImage.category)}
                     </span>
                 </div>
 
