@@ -177,13 +177,13 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
               </div>
             </div>
 
-            <div className="relative h-64 lg:h-full rounded-2xl overflow-hidden group">
+            <div className="relative flex-1 w-full min-h-[250px] lg:min-h-0 rounded-2xl overflow-hidden group">
               <img
                   src="/groupe/group_with_masker.jpg"
                   alt="group photo"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
             </div>
           </div>
 
