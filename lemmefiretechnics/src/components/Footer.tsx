@@ -85,16 +85,10 @@ export default function Footer() {
               <li className="flex items-start space-x-2">
                 <Mail className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
                 <a
-                  href="mailto:contact@lemmefiretechnics.com"
+                  href="mailto:david.leemans@fire.brussels"
                   className="text-gray-400 hover:text-red-400 text-sm transition-colors"
                 >
-                  contact@lemmefiretechnics.com
-                </a>
-              </li>
-              <li className="flex items-start space-x-2">
-                <Phone className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                <a href="tel:+32456789012" className="text-gray-400 hover:text-red-400 text-sm transition-colors">
-                  +32 (456) 789-012
+                  david.leemans@fire.brussels
                 </a>
               </li>
             </ul>

@@ -145,20 +145,8 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
                   </div>
                   <div>
                     <div className="text-sm text-gray-400 mb-1">{t('contact.email_label')}</div>
-                    <a href="mailto:contact@lemmefiretechnics.com" className="text-white hover:text-red-400 transition-colors">
-                      contact@lemmefiretechnics.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-red-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-400 mb-1">{t('contact.phone_label')}</div>
-                    <a href="tel:+32456789012" className="text-white hover:text-red-400 transition-colors">
-                      +32 (456) 789-012
+                    <a href="mailto:david.leemans@fire.brussels" className="text-white hover:text-red-400 transition-colors">
+                      david.leemans@fire.brussels
                     </a>
                   </div>
                 </div>
