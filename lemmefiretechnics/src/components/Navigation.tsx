@@ -85,16 +85,20 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
-          {/* LOGO */}
-          <div className="flex items-center space-x-1 md:space-x-3 cursor-pointer" onClick={() => handleNavClick('/')}>
-            <div className="relative">
-              <Flame className="w-8 h-8 md:w-10 md:h-10 text-red-600" fill="currentColor" />
-              <div className="absolute inset-0 bg-red-600 blur-xl opacity-50"></div>
-            </div>
-            <span className="text-base md:text-xl font-bold bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent truncate">
-              LEMME FIRE TECHNICS
-            </span>
+          <div className="flex items-center space-x-2 md:space-x-3 cursor-pointer" onClick={() => handleNavClick('/')}>
+          <div className="relative flex items-center justify-center">
+            <img 
+              src="/logo.png" 
+              alt="Lemme Fire Technics Logo" 
+              className="w-8 h-8 md:w-10 md:h-10 object-contain relative z-10" 
+              loading='lazy'
+            />
+            <div className="absolute inset-0 bg-red-600 blur-xl opacity-50"></div>
           </div>
+          <span className="text-base md:text-xl font-bold bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent truncate">
+            LEMME FIRE TECHNICS
+          </span>
+        </div>
 
           {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center space-x-8">

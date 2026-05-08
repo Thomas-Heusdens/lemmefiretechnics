@@ -147,6 +147,9 @@ export default function FormationsList({ category, onSelectFormation, onBack }: 
                     src={formation.image_url}
                     alt={getContent(formation, 'name')}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent opacity-90"></div>
                   

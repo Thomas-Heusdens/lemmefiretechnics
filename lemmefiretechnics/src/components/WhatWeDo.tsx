@@ -46,8 +46,10 @@ export default function WhatWeDo() {
             <img
                 src="/david/david_main.jpeg"
                 alt="David Leemans"
-                // ADDED: absolute inset-0 to prevent the image from forcing its own height
                 className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
           </div>
@@ -142,6 +144,9 @@ export default function WhatWeDo() {
                     src={img}
                     alt={`Experience China ${index + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
                 </div>

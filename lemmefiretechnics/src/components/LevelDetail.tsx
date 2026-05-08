@@ -166,6 +166,9 @@ export default function LevelDetail({
                       src={imagesToUse[selectedImageIndex]} 
                       alt="Gallery" 
                       className="w-full h-full object-cover transition-opacity duration-500" 
+                      loading="lazy"
+                      onContextMenu={(e) => e.preventDefault()}
+                      onDragStart={(e) => e.preventDefault()}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-transparent to-transparent lg:hidden"></div>
               </div>

@@ -66,6 +66,9 @@ const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySele
                   src="/st_vl/car_in_truck.jpg"
                   alt="Car dismantling"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
               </div>
@@ -112,6 +115,9 @@ const Formations = forwardRef<HTMLDivElement, FormationsProps>(({ onCategorySele
                   src="/cours/entreprise.jpeg"
                   alt="Civilian fire safety training"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
               </div>

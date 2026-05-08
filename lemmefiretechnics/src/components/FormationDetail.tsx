@@ -165,6 +165,9 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
                 src={formation.image_url}
                 alt={getContent(formation, 'name')}
                 className="w-full h-full object-cover"
+                loading="lazy"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-4 md:p-8">
@@ -233,6 +236,9 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
                       src={currentLevel.image_url}
                       alt={levelName}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      onContextMenu={(e) => e.preventDefault()}
+                      onDragStart={(e) => e.preventDefault()}
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
@@ -296,44 +302,50 @@ export default function FormationDetail({ formationId, onSelectLevel, onBack }: 
                       {levelDesc}
                     </p>
 
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
-                      <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
-                        <Clock className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
-                        <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.duration', 'Durée')}</span>
-                        <span className="text-white font-bold text-xs md:text-base text-center">{levelDuration}</span>
+                    {/* CONDITIONAL RENDER BASED ON CATEGORY */}
+                    {formation.category === 'firefighter' ? (
+                      <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-5 md:p-6 mb-6">
+                        <p className="text-red-400 text-sm md:text-base text-center font-medium leading-relaxed">
+                          {t('formation_detail.firefighter_disclaimer', "Ces formations spécifiques sont dispensées par David directement à l'école des pompiers de Bruxelles.")}
+                        </p>
                       </div>
-                      <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
-                        <Calendar className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
-                        <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.sessions', 'Séances')}</span>
-                        <span className="text-white font-bold text-xs md:text-base text-center">{currentLevel.sessions_per_week}/sem</span>
-                      </div>
-                      <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
-                        <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
-                        <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.module', 'Module')}</span>
-                        <span className="text-white font-bold text-xs md:text-base text-center">{currentLevel.display_order}</span>
-                      </div>
-                    </div>
-                  </div>
+                    ) : (
+                      <>
+                        <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
+                          <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
+                            <Clock className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
+                            <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.duration', 'Durée')}</span>
+                            <span className="text-white font-bold text-xs md:text-base text-center">{levelDuration}</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
+                            <Calendar className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
+                            <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.sessions', 'Séances')}</span>
+                            <span className="text-white font-bold text-xs md:text-base text-center">{currentLevel.sessions_per_week}/sem</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 md:p-4 bg-white/5 rounded-xl border border-white/5">
+                            <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-red-500 mb-1 md:mb-2" />
+                            <span className="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mb-0.5">{t('formation_detail.module', 'Module')}</span>
+                            <span className="text-white font-bold text-xs md:text-base text-center">{currentLevel.display_order}</span>
+                          </div>
+                        </div>
 
-                  <button
-                    onClick={() => formation && onSelectLevel({ 
-                        // Spread full object to pass ALL localized fields (fr/nl)
-                        ...currentLevel, 
-                        
-                        // Pass parent info
-                        formationName: getContent(formation, 'name'),
-                        
-                        // Map legacy fields for compatibility
-                        level: currentLevel.display_order,
-                        imageUrl: currentLevel.image_url,
-                        videoUrl: currentLevel.video_url,
-                        galleryUrls: currentLevel.gallery_urls,
-                        sessionsPerWeek: currentLevel.sessions_per_week
-                    })}
-                    className="w-full py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white text-sm md:text-base font-bold rounded-xl transition-all duration-300 shadow-lg shadow-red-900/20 hover:shadow-red-900/40 hover:-translate-y-1 relative z-20 active:scale-95"
-                  >
-                    {t('formation_detail.view_program', "VOIR LE PROGRAMME & S'INSCRIRE")}
-                  </button>
+                        <button
+                          onClick={() => formation && onSelectLevel({ 
+                              ...currentLevel, 
+                              formationName: getContent(formation, 'name'),
+                              level: currentLevel.display_order,
+                              imageUrl: currentLevel.image_url,
+                              videoUrl: currentLevel.video_url,
+                              galleryUrls: currentLevel.gallery_urls,
+                              sessionsPerWeek: currentLevel.sessions_per_week
+                          })}
+                          className="w-full py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white text-sm md:text-base font-bold rounded-xl transition-all duration-300 shadow-lg shadow-red-900/20 hover:shadow-red-900/40 hover:-translate-y-1 relative z-20 active:scale-95"
+                        >
+                          {t('formation_detail.view_program', "VOIR LE PROGRAMME & S'INSCRIRE")}
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
 
                 {hasMultipleLevels && (

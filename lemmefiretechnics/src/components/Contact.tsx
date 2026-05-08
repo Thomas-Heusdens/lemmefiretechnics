@@ -170,6 +170,9 @@ const Contact = forwardRef<HTMLDivElement>((_, ref) => {
                   src="/groupe/group_with_masker.jpg"
                   alt="group photo"
                   className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
             </div>

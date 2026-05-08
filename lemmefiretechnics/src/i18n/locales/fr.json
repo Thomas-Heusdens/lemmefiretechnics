@@ -11,7 +11,7 @@
     "quick_links": "Liens rapides",
     "follow_us": "Suivez-nous",
     "copyright": "Tous droits réservés.",
-    "created_by": "Créé avec passion par"
+    "created_by": "Créé par"
   },
   "brevets": {
     "my_certifications": "Mes Certifications",
@@ -120,7 +120,8 @@
     "duration": "Durée",
     "sessions": "Séances",
     "module": "Module",
-    "view_program": "VOIR LE PROGRAMME & S'INSCRIRE"
+    "view_program": "VOIR LE PROGRAMME & S'INSCRIRE",
+    "firefighter_disclaimer": "Ces formations spécifiques sont dispensées par David directement à la CFPB."
   },
   "level_detail": {
     "certified_badge": "Formation Certifiante",

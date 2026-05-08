@@ -1,4 +1,4 @@
-import { Flame, Mail, Instagram, Phone } from 'lucide-react';
+import { Flame, Mail, Instagram, Phone, Youtube } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; // Import hook
 
@@ -25,12 +25,16 @@ export default function Footer() {
           
           {/* BRANDING */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="relative">
-                <Flame className="w-8 h-8 text-red-600" fill="currentColor" />
+            <div className="flex items-center space-x-2 md:space-x-3 mb-4">
+              <div className="relative flex-shrink-0">
+                <img 
+                  src="/logo.png" 
+                  alt="Lemme Fire Technics Logo" 
+                  className="w-8 h-8 md:w-10 md:h-10 object-contain relative z-10" 
+                />
                 <div className="absolute inset-0 bg-red-600 blur-xl opacity-50"></div>
               </div>
-              <span className="text-lg font-bold bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
+              <span className="text-base md:text-xl font-bold bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent truncate">
                 LEMME FIRE TECHNICS
               </span>
             </div>
@@ -95,16 +99,25 @@ export default function Footer() {
           </div>
 
           {/* SOCIAL */}
-          <div>
+          <div className='flex flex-col items-start'>
             <h3 className="text-white font-semibold mb-4">{t('footer.follow_us')}</h3>
             <a
               href="https://www.instagram.com/lemmefiretechnics/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 rounded-lg text-white text-sm transition-all duration-300"
+              className="inline-flex mb-2 items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 rounded-lg text-white text-sm transition-all duration-300"
             >
               <Instagram className="w-5 h-5" />
               <span>Instagram</span>
+            </a>
+            <a
+              href="https://www.youtube.com/@Lemmefiretechnics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 rounded-lg text-white text-sm transition-all duration-300"
+            >
+              <Youtube className="w-5 h-5" />
+              <span>YouTube</span>
             </a>
           </div>
         </div>

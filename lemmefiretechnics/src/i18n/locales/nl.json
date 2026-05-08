@@ -11,7 +11,7 @@
     "quick_links": "Snelle Links",
     "follow_us": "Volg ons",
     "copyright": "Alle rechten voorbehouden.",
-    "created_by": "Gemaakt met passie door"
+    "created_by": "Gemaakt door"
   },
   "brevets": {
     "my_certifications": "Mijn Certificaten",
@@ -120,7 +120,8 @@
     "duration": "Duur",
     "sessions": "Sessies",
     "module": "Module",
-    "view_program": "BEKIJK PROGRAMMA & INSCHRIJVEN"
+    "view_program": "BEKIJK PROGRAMMA & INSCHRIJVEN",
+    "firefighter_disclaimer": "Deze specifieke opleidingen worden door David rechtstreeks in de CFPB geregeld."
   },
   "level_detail": {
     "certified_badge": "Gecertificeerde Opleiding",

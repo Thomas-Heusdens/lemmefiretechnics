@@ -282,6 +282,8 @@ export default function Gallery() {
                 alt={image.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
@@ -308,9 +310,12 @@ export default function Gallery() {
             {/* Image Container */}
             <div className="flex-1 relative flex items-center justify-center bg-black">
                 <img
-                src={selectedImage.url}
-                alt={selectedImage.title}
-                className="max-h-[60vh] md:max-h-[90vh] w-full object-contain" 
+                  src={selectedImage.url}
+                  alt={selectedImage.title}
+                  className="max-h-[60vh] md:max-h-[90vh] w-full object-contain" 
+                  loading="lazy"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
             </div>
 
