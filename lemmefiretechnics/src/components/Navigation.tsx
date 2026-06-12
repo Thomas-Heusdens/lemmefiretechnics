@@ -111,10 +111,14 @@ export default function Navigation() {
               {t('nav.home')}
             </button>
 
-            <div className="relative">
+            <div
+              className="relative"
+              onMouseEnter={() => setIsFormationOpen(true)}
+              onMouseLeave={() => setIsFormationOpen(false)}
+            >
               <button
                 ref={buttonRef}
-                onClick={() => setIsFormationOpen(!isFormationOpen)}
+                onClick={() => handleNavClick('/formations')}
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
                   isFormationsActive ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
                 }`}
@@ -126,20 +130,22 @@ export default function Navigation() {
               {isFormationOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-48 bg-gray-900 border border-red-900/30 rounded-lg shadow-xl shadow-black/50 overflow-hidden"
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-48"
                 >
-                  <button
-                    onClick={() => handleNavClick('/formations/firefighter')}
-                    className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors border-b border-gray-800"
-                  >
-                    {t('nav.firefighters')}
-                  </button>
-                  <button
-                    onClick={() => handleNavClick('/formations/civilian')}
-                    className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors"
-                  >
-                    {t('nav.civilians')}
-                  </button>
+                  <div className="bg-gray-900 border border-red-900/30 rounded-lg shadow-xl shadow-black/50 overflow-hidden">
+                    <button
+                      onClick={() => handleNavClick('/formations/firefighter')}
+                      className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors border-b border-gray-800"
+                    >
+                      {t('nav.firefighters')}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('/formations/civilian')}
+                      className="w-full text-center px-4 py-3 text-sm text-gray-300 hover:bg-red-900/20 hover:text-red-400 transition-colors"
+                    >
+                      {t('nav.civilians')}
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -151,6 +157,15 @@ export default function Navigation() {
               }`}
             >
               {t('nav.gallery')}
+            </button>
+
+            <button
+              onClick={() => handleNavClick('/contact')}
+              className={`text-sm font-medium transition-colors ${
+                location.pathname === '/contact' ? 'text-red-500' : 'text-gray-300 hover:text-red-400'
+              }`}
+            >
+              {t('nav.contact')}
             </button>
 
             {/* --- LANGUE DROPDOWN (DESKTOP) --- */}
@@ -220,7 +235,12 @@ export default function Navigation() {
             </button>
             <div className="w-12 h-px bg-gray-800/80"></div>
             <div className="flex flex-col items-center space-y-4">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-[0.2em]">{t('nav.formations')}</span>
+              <button
+                onClick={() => handleNavClick('/formations')}
+                className="text-xs font-semibold text-gray-500 hover:text-red-400 uppercase tracking-[0.2em] transition-colors"
+              >
+                {t('nav.formations')}
+              </button>
               <button onClick={() => handleNavClick('/formations/firefighter')} className="text-lg font-medium text-gray-300">
                 {t('nav.firefighters')}
               </button>
@@ -231,6 +251,10 @@ export default function Navigation() {
             <div className="w-12 h-px bg-gray-800/80"></div>
             <button onClick={() => handleNavClick('/gallery')} className="text-lg font-medium tracking-wide text-gray-300">
               {t('nav.gallery')}
+            </button>
+            <div className="w-12 h-px bg-gray-800/80"></div>
+            <button onClick={() => handleNavClick('/contact')} className="text-lg font-medium tracking-wide text-gray-300">
+              {t('nav.contact')}
             </button>
           </div>
         </div>

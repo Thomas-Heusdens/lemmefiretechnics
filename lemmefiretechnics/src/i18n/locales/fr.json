@@ -4,7 +4,8 @@
     "formations": "FORMATIONS",
     "gallery": "GALERIE",
     "firefighters": "POMPIERS",
-    "civilians": "CIVILS"
+    "civilians": "CIVILS",
+    "contact": "CONTACT"
   },
   "footer": {
     "description": "Formation et éducation professionnelles à la sécurité incendie pour les pompiers et les civils.",
@@ -157,6 +158,14 @@
   "seo": {
     "home": {
       "description": "David Leemans: Formations professionnelles pour pompiers et civils. Brevets, sécurité incendie, secours technique et gestion de crise en Belgique."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contactez David Leemans pour vos formations en sécurité incendie. Remplissez le formulaire pour pompiers, civils et entreprises partout en Belgique."
+    },
+    "formations": {
+      "title": "Formations",
+      "description": "Découvrez nos formations en sécurité incendie pour pompiers et civils. Programmes privés sur mesure basés sur 20 ans d'expérience de terrain en Belgique."
     },
     "gallery": {
       "title": "Galerie Photos",

@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, type RefObject } from 'react';
 import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // <--- 1. IMPORT THIS
-import SEO from './components/SEO';               // <--- 2. IMPORT THIS
+import { useTranslation } from 'react-i18next';
+import SEO from './components/SEO';
 
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -21,36 +21,74 @@ function Home() {
   const formationsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (location.hash === '#contact') {
-        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
-      } else if (location.hash === '#formations') {
-        formationsRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+  const NAV_OFFSET = 80;
 
-    return () => clearTimeout(timer);
+  const scrollToRef = (
+    ref: RefObject<HTMLDivElement>,
+    behavior: ScrollBehavior = 'smooth'
+  ) => {
+    const el = ref.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top: Math.max(0, top), behavior });
+  };
+
+  useEffect(() => {
+    let target: RefObject<HTMLDivElement> | null = null;
+    if (location.pathname === '/contact' || location.hash === '#contact') {
+      target = contactRef;
+    } else if (location.pathname === '/formations' || location.hash === '#formations') {
+      target = formationsRef;
+    }
+    if (!target) return;
+    const ref = target;
+
+    // Already-loaded page (e.g. clicking the nav while browsing)
+    if (document.readyState === 'complete') {
+      const timer = setTimeout(() => scrollToRef(ref, 'smooth'), 100);
+      return () => clearTimeout(timer);
+    }
+
+    // Fresh load (e.g. a visitor landing here from an ad)
+    let lastTop = NaN;
+    let ticks = 0;
+    const id = setInterval(() => {
+      ticks += 1;
+      const el = ref.current;
+      if (el) {
+        const top = Math.max(
+          0,
+          Math.round(el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET)
+        );
+        window.scrollTo({ top, behavior: 'auto' });
+        if (top === lastTop) clearInterval(id);
+        lastTop = top;
+      }
+      if (ticks >= 10) clearInterval(id);
+    }, 150);
+    return () => clearInterval(id);
   }, [location]);
 
-  const scrollToFormations = () => {
-    formationsRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToContact = () => {
-    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToFormations = () => scrollToRef(formationsRef);
+  const scrollToContact = () => scrollToRef(contactRef);
 
   const navigate = useNavigate();
   const handleCategorySelect = (category: 'civilian' | 'firefighter') => {
      navigate(`/formations/${category}`);
   };
 
+  const pageSeo =
+    location.pathname === '/contact'
+      ? { title: t('seo.contact.title'), description: t('seo.contact.description') }
+      : location.pathname === '/formations'
+      ? { title: t('seo.formations.title'), description: t('seo.formations.description') }
+      : { title: 'Lemme Fire Technics', description: t('seo.home.description') };
+
   return (
     <>
-      <SEO 
-        title="Lemme Fire Technics" 
-        description={t('seo.home.description')} 
+      <SEO
+        title={pageSeo.title}
+        description={pageSeo.description}
       />
       <Hero 
         onScrollToContact={scrollToContact} 
@@ -73,7 +111,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (!location.hash) {
+    const isSectionRoute = location.pathname === '/contact' || location.pathname === '/formations';
+    if (!location.hash && !isSectionRoute) {
       window.scrollTo(0, 0);
     }
   }, [location.pathname, location.hash]);
@@ -94,6 +133,8 @@ function App() {
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Home />} />
+          <Route path="/formations" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/formations/:category" element={<FormationsListWrapper />} />
           <Route path="/formation/:formationId" element={<FormationDetailWrapper />} />
@@ -153,7 +194,7 @@ function LevelDetailWrapper() {
    }
 
    const handleEnroll = () => {
-       navigate('/#contact'); 
+       navigate('/contact');
    };
 
    return (

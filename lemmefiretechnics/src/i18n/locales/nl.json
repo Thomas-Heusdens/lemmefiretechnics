@@ -4,7 +4,8 @@
     "formations": "OPLEIDINGEN",
     "gallery": "GALERIJ",
     "firefighters": "BRANDWEER",
-    "civilians": "BURGERS"
+    "civilians": "BURGERS",
+    "contact": "CONTACT"
   },
   "footer": {
     "description": "Professionele opleiding en educatie in brandveiligheid voor brandweerlieden en burgers.",
@@ -157,6 +158,14 @@
   "seo": {
     "home": {
       "description": "David Leemans: Professionele opleidingen voor brandweer en burgers. Brevetten, brandveiligheid, technische hulpverlening en crisisbeheer in België."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Neem contact op met David Leemans voor uw opleidingen in brandveiligheid. Vul het formulier in voor brandweer, burgers en bedrijven in heel België."
+    },
+    "formations": {
+      "title": "Opleidingen",
+      "description": "Ontdek onze opleidingen in brandveiligheid voor brandweer en burgers. Privéprogramma's op maat, gebaseerd op 20 jaar terreinervaring in heel België."
     },
     "gallery": {
       "title": "Fotogalerij",
